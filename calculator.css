@@ -1,0 +1,119 @@
+body{
+    padding : 0px;
+    background-color: powderblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+header{
+    text-align: center;
+    font-family: "Press Start 2P";
+    width: 100%;
+    max-width: 600px;
+    padding:2px;
+    margin-bottom:10px;
+    border-radius: 10px;
+}
+
+main{
+    margin-top: 0px;
+    padding:10px;
+    border-radius: 10px;
+
+}
+#calculator-container{
+    display:flex;
+    flex-direction: column;
+    border: solid;
+    width: 300px;
+    margin: auto;
+    border-radius: 10px;
+    background-color: rgb(190,255, 240); 
+    box-shadow: 10px 10px 5px grey;
+
+}
+
+
+#display{ 
+    width: 290px;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: whitesmoke;
+    font-family: "Press Start 2P";
+    height: 60px;
+    border: solid;
+    border-width: 0.1px;
+    position: relative;
+    
+}
+#sup-container{
+    position: relative;
+    background-color: greenyellow;
+    padding : 0px;
+}
+
+#sup-text{
+    position: absolute;
+    left: 10px;
+    top:0px;
+    margin: 5px;
+    color: black;
+    font-size: 10px;
+}
+#sign{
+position: absolute;
+right: 10px;
+top:0px;
+margin: 5px;
+color: red;
+font-weight: bold;
+}
+#display-text{
+    position: absolute;
+    right: 0px;
+    bottom:0px;
+    margin: 9px;
+    font-size: large;
+}
+
+
+#button-container{
+    margin : auto;
+    width: 300px;
+    height: 400px;
+    display:grid;
+    grid-template-columns: repeat(4,1fr);
+
+}
+#btnEqual{
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 4;
+    grid-row-end: 6;
+
+    
+}
+.calcBt{
+    border-radius: 10px;
+    background-color: rgb(190,230, 240); 
+}
+.calcBt:focus {
+    outline:0;
+
+}
+.calcBt:hover {
+    background-color:rgb(120, 255, 255);
+
+
+}
+
+.signBtn{
+    background-color:rgb(190, 255, 255);
+
+}
+
+.signBtn:hover {
+    background-color:rgb(120, 255, 255);
+
+}

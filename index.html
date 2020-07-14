@@ -1,0 +1,203 @@
+<head>
+    <title>CALCULATOR</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P">
+    <link rel="stylesheet" type="text/css" href="calculator.css">
+    <script type="text/javascript" src="calculator.js"></script>
+</head>
+<html>
+
+<body>
+    <header>
+        <h1>CALCULATOR</h1>
+        <p>For The Odin Project</p>
+    </header>
+    <main>
+        <div id="calculator-container">
+            <div id="display">
+                <div id="sup-container">
+                    <p id="sup-text"></p>
+                    <p id="sign"></p>
+                </div>
+
+                <p id="display-text"></p>
+
+            </div>
+            <div id="button-container">
+                <button id="clear" class="calcBt signBtn">C</button>
+                <button id="btnBack" class="calcBt signBtn">←</button>
+                <button id="btnMultiply" class="calcBt signBtn">*</button>
+                <button id="btnDivide" class="calcBt signBtn">/</button>
+                <button id="btnSeven" class="calcBt">7</button>
+                <button id="btnEight" class="calcBt">8</button>
+                <button id="btnNine" class="calcBt">9</button>
+                <button id="btnMinus" class="calcBt signBtn">-</button>
+                <button id="btnFour" class="calcBt">4</button>
+                <button id="btnFive" class="calcBt">5</button>
+                <button id="btnSix" class="calcBt">6</button>
+                <button id="btnPlus" class="calcBt signBtn">+</button>
+                <button id="btnOne" class="calcBt">1</button>
+                <button id="btnTwo" class="calcBt">2</button>
+                <button id="btnThree" class="calcBt">3</button>
+                <button id="btnEqual" class="calcBt signBtn">=</button>
+                <button id="btnPoint" class="calcBt">.</button>
+                <button id="btnZero" class="calcBt">0</button>
+                <button id="btnNegative" class="calcBt">(-)</button>
+
+            </div>
+        </div>
+    </main>
+
+</body>
+
+<script>
+    const buttons = document.querySelectorAll("#button-container button");
+    const display = [document.querySelector("#display-text"), document.querySelector("#sup-text"), document.querySelector("#sign")];
+    //operation[0] sup text, operation[1] text, operation[2] sign
+    let operation = [null, null, null];
+    window.addEventListener("keydown", e => addKeyValue(e))
+
+    Array.from(buttons).forEach(element => {
+        element.addEventListener("click", addButtonValue)
+    });
+
+    function addKeyValue(e) {
+        let buttonPresed;
+        console.log(e.which)
+        switch (e.keyCode) {
+
+            case 97:
+            case 49:
+                buttonPresed = "btnOne";
+                break;
+            case 98:
+            case 50:
+                buttonPresed = "btnTwo";
+                break;
+            case 99:
+            case 51:
+                buttonPresed = "btnThree";
+                break;
+            case 100:
+            case 52:
+                buttonPresed = "btnFour";
+                break;
+            case 101:
+            case 53:
+                buttonPresed = "btnFive";
+                break;
+            case 102:
+            case 54:
+                buttonPresed = "btnSix";
+                break;
+            case 103:
+            case 55:
+                buttonPresed = "btnSeven";
+                break;
+            case 104:
+            case 56:
+                buttonPresed = "btnEight";
+                break;
+            case 105:
+            case 57:
+                buttonPresed = "btnNine";
+                break;
+            case 46:
+                buttonPresed = "clear";
+                break;
+            case 8:
+                buttonPresed = "btnBack";
+                break;
+            case 106:
+                buttonPresed = "btnMultiply";
+                break;
+            case 109:
+            case 173:
+                buttonPresed = "btnMinus";
+                break;
+            case 13:
+                buttonPresed = "btnEqual";
+                break;
+            case 107:
+                buttonPresed = "btnPlus";
+                break;
+            case 110:
+            case 190:
+                buttonPresed = "btnPoint";
+                break;
+            case 96:
+            case 48:
+                buttonPresed = "btnZero";
+                break;
+            case 111:
+                buttonPresed = "btnDivide";
+                break;
+            default:
+                buttonPresed = false;
+        }
+        if (buttonPresed) {
+            buttonPresed = document.querySelector(`#${buttonPresed}`);
+            buttonPresed.click();
+        }
+    }
+
+
+    function addButtonValue() {
+        switch (this.textContent) {
+
+            case "C":
+                operation = [null, null, null];
+                ShowInDisplay(display, operation);
+                break;
+            case "=":
+                if (operation[0] != null) {
+                    operation = operate(operation);
+                    ShowInDisplay(display, operation);
+                } else {
+                    operation[0] = operation[1];
+                    ShowInDisplay(display, operation);
+                }
+
+                break;
+            case "←":
+                if (operation[1] != null) {
+                    operation[1] = operation[1].slice(0, -1);
+                    ShowInDisplay(display, operation);
+                }
+                break;
+            case "+":
+            case "-":
+            case "/":
+            case "*":
+
+                if (operation[0] === null) {
+                    operation[0] = display[0].textContent;
+                    operation[1] = null;
+                } else if (operation[1]) {
+                    /* operation[0] = display[0].textContent;
+                     operation[2] = this.textContent;
+                     operation[1] = null;
+                     ShowInDisplay(display, operation);*/
+                }
+                if (operation[1] != null) {
+                    operation = operate(operation);
+                }
+                operation[2] = this.textContent;
+
+                ShowInDisplay(display, operation);
+                break;
+
+            default:
+                if (operation[1] === null || operation[1].length < 15) {
+                    isNaN(+operation[1]) || operation[1] === null ? operation[1] = this.textContent : operation[1] += this.textContent;
+                    ShowInDisplay(display, operation);
+                }
+
+                break;
+        }
+
+    }
+
+
+</script>
+
+</html>
